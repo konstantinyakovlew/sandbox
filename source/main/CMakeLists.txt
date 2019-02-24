@@ -9,7 +9,4 @@ set(SOURCES
 source_group("src" FILES ${SOURCES})
 
 add_executable(main ${SOURCES})
-
-add_subdirectory("${SOURCE_DIR}/common" common)
-
 target_link_libraries(main common)

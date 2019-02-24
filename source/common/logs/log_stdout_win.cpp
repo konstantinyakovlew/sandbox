@@ -17,7 +17,7 @@ void LoggerStdout_Win::Print( LogLevel level, const std::string & message )
     const int color = GetColor( level );
 	SetConsoleTextAttribute( hstdout, color );
 
-    LoggerStdout_Win::Print( level, message );
+    LoggerStdout::Print( level, message );
 
     std::cout << "[" << LogLevel_ToStr( level ) << "] " << message << std::endl;
 
