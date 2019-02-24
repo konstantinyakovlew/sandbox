@@ -78,7 +78,6 @@ private:
 private:
     LogLevel                    m_level;
     std::string                 m_str;
-    std::string                 m_str2;
     std::vector<LogChannel_t>   m_channels;
 };
 
@@ -99,9 +98,6 @@ void Log::Print( LogLevel level, TArgs ...args )
     if ( m_str.empty() )
         return;
 
-    if ( m_str.back() == ' ' )
-        m_str.pop_back();
-
     for ( auto & channel : m_channels )
         channel->Print( level, m_str );
 }
@@ -111,16 +107,12 @@ void Log::Print( LogLevel level, TArgs ...args )
 template<typename T>
 void Log::Print( const T & value )
 {
-    m_str2.clear();
-
-         if constexpr ( std::is_same<T, std::string>::value )   m_str2 = value;
-    else if constexpr ( std::is_same<T, const char *>::value )  m_str2 = value?value:"";
-    else if constexpr ( std::is_same<T, char *>::value )        m_str2 = value?value:"";
-    else if constexpr ( std::is_same<T, char>::value )          m_str2 = value;
-    else if constexpr ( std::is_same<T, bool>::value )          m_str2 = value?"true":"false";
-    else                                                        m_str2 = std::to_string( value );
-
-    m_str += m_str2;
+         if constexpr ( std::is_same<T, std::string>::value )   m_str += value;
+    else if constexpr ( std::is_same<T, const char *>::value )  m_str += value?value:"";
+    else if constexpr ( std::is_same<T, char *>::value )        m_str += value?value:"";
+    else if constexpr ( std::is_same<T, char>::value )          m_str += value;
+    else if constexpr ( std::is_same<T, bool>::value )          m_str += value?"true":"false";
+    else                                                        m_str += std::to_string( value );
 }
 
 //----------------------------------------------------------------

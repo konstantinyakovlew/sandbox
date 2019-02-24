@@ -18,6 +18,7 @@ endif(MSVC)
 
 # Detect platform
 if(WIN32)
+    set(PLATFORM_WINDOWS=true)
     add_definitions(-DPLATFORM_WINDOWS)
 endif(WIN32)
 
